@@ -156,7 +156,7 @@ def get_chapter_text(chapter_page):
     chapter_section = chapter_page.find('section', attrs={'id': 'viewChapter'})
     text_box = chapter_section.find('div', attrs={'class': 'boxbody'})
     
-    return clean_html(text_box)
+    return clean_html(text_box, div=False)
 
 
 # %% main function
