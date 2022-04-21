@@ -18,21 +18,21 @@ def clean_html(html_tag, div=True, rel=True, style=True):
     """Remove unwanted elements from HTML.
     
     argument html_tag: bs4.Tag
+    argument div: bool, remove inner <div> tags?
+    argument rel: bool, remove "rel" attribute from <a> tags?
+    argument style: bool, remove "style" attribute from <span> tags?
     
     returns: str cleaned HTML
     """
     
-    # remove inner divs
     if div:
         for div in html_tag.find_all('div'):
             div.decompose()
     
-    # remove invalid rel tag from links
     if rel:
         for a in html_tag.find_all('a', attrs={'rel': 'nofollow'}):
             del a['rel']
             
-    # remove unsupported styling
     if style:
         for span in html_tag.find_all('span'):
             if span.has_attr('style'):
@@ -76,6 +76,7 @@ def get_chapter_page(story_id, chapter_id, chapter_num):
     
     argument story_id: str or int story ID number
     argument chapter_id: str or int chapter ID number
+    argument chapter_num: str or int chapter number
     
     returns bs4.BeautifulSoup of page contents
     """
